@@ -1,0 +1,26 @@
+borekhov@hse.ru
+
+clone
+
+add
+
+status
+
+git push origin
+
+git commit -a -m 'text'
+
+git checkout dev
+
+Python
+======
+
+'\n'.join(a)
+
+Dictionary
+----------
+
+a = d.keys() #tuple
+
+
+поместить в репозиторий скрипт (каждая папка для отдельного дз)
