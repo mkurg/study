@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import lxml
 import urllib.request
 import re
 import csv
 
-initial_url = 'http://www.mr-info.ru/14108-v-tvorcheskih-planah-magnitogorsk-premeroy-priklyucheniy-chipollino-dirizhiroval-nemirovich-danchenko.html'
+initial_url = 'http://www.mr-info.ru/12017-ministr-postavil-pyaterku-nash-gorod-poluchil-pochetnuyu-gramotu-za-surdlimpiadu.html'
 
-pages_number = 5
+pages_number = 1800
 
 all_urls = []
 all_urls.append(initial_url)
@@ -39,6 +38,7 @@ def download_page(url):
 		page = urllib.request.urlopen(url)
 	except HTTPError:
 		success = False
+		return [success, page]
 	page = page.read()
 	page = page.decode("cp1251")
 	try:
@@ -46,8 +46,6 @@ def download_page(url):
 	except AttributeError:
 		success = False
 		return [success, page]
-	#print(filename)
-	#print(success)
 	with open('raw_html/' + filename, 'w', encoding='utf-8') as local_file:
 		local_file.write(page)
 	if success == True:
@@ -58,15 +56,10 @@ def download_page(url):
 
 	return [success, page]
 
-
-#a = download_page(initial_url)
-
 def extract_urls(page):
 	urls = re.findall('(http://www\.mr-info\.ru/([a-z0-9]*-)*[a-z0-9]*\.html)', page)
 	for i in urls:
 		all_urls.append(i[0])
-
-#extract_urls(a[1])
 
 for i in all_urls:
 	if pages_number > 0:

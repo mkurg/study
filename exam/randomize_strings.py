@@ -7,6 +7,9 @@ import random
 with open('./tables/source_post1950_wordcount_by_words.csv','r') as source:
     data = [ (random.random(), line) for line in source ]
 data.sort()
+with open('./tables/source_post1950_wordcount_by_words.csv','r') as source:
+    header = source.readline()
 with open('./tables/source_post1950_wordcount_randomized.csv','w') as target:
+    target.write(header)
     for _, line in data:
         target.write( line )

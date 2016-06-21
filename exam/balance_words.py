@@ -9,7 +9,8 @@ with open("./tables/source_post1950_wordcount.csv", encoding="utf-8") as csv_fil
 	reader = csv.DictReader(csv_file)
 	with open("./tables/source_post1950_wordcount_by_words.csv", "w", encoding="utf-8") as out_file:
 		writer = csv.DictWriter(out_file, fieldnames=reader.fieldnames)
-		writer.writeheader
+		print(reader.fieldnames)
+		writer.writeheader()
 		for row in reader:
 			try:
 				if int(row['words']) >= 100000:
