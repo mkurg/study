@@ -3,6 +3,9 @@
 
 import csv
 
+publ = 0
+xud = 0
+uchn = 0
 
 
 with open("./tables/source_post1950_wordcount_by_words.csv", encoding="utf-8") as csv_file:
@@ -13,13 +16,17 @@ with open("./tables/source_post1950_wordcount_by_words.csv", encoding="utf-8") a
 		for row in reader:
 			try:
 				if row['sphere'].startswith('публицистика'):
-					print(row)
-					#a = for val in row: a[val] = row[val]
-					writer.writerow(row)
-				elif int(row['words']) >= 80000:
-					row['words'] = int(int(row['words']) / 2)
-					writer.writerow(row)
-					writer.writerow(row)
+					publ += int(row['words'])
+					if publ <= 29000000:
+						writer.writerow(row)
+				elif row['sphere'].startswith('художественная'):
+					xud += int(row['words'])
+					if xud <= 40000000:
+						writer.writerow(row)
+				elif row['sphere'].startswith('учебно-научная'):
+					uchn += int(row['words'])
+					if uchn <= 12000000:
+						writer.writerow(row)
 				else:
 					writer.writerow(row)
 			except ValueError:
